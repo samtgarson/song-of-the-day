@@ -5,17 +5,23 @@
   "author": "Sam Garson <samtgarson@gmail.com>",
   "private": true,
   "dependencies": {
+    "deep-map-keys": "^1.2.0",
+    "inflect": "^0.4.0",
+    "interactor": "^2.0.0",
     "micro": "^9.1.4",
     "morgan": "^1.9.0",
     "morgan-json": "^1.1.0",
     "node-async-router": "^0.0.2",
     "nuxt": "npm:nuxt-edge",
-    "nuxt-oauth": "1.0.0",
+    "nuxt-buefy": "^0.1.0",
+    "nuxt-oauth": "2.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.37.6",
     "sequelize-cli": "^4.0.0",
-    "uuid": "^3.2.1"
+    "spotify-web-api-node": "^3.1.1",
+    "uuid": "^3.2.1",
+    "vue-feather-icons": "^4.7.1"
   },
   "pre-commit": [
     "test"

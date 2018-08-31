@@ -1,6 +1,7 @@
 import autoprefixer from 'autoprefixer'
 import { readdirSync } from 'fs'
 import { resolve } from 'path'
+import Auth from './src/api/services/auth'
 
 const PRODUCTION = process.env.NODE_ENV === 'production'
 if (!PRODUCTION) {
@@ -28,7 +29,7 @@ export default {
   },
   css: [
     '@@/node_modules/normalize.css/normalize.css',
-    '@/assets/sass/main.sass'
+    '@/assets/sass/main.scss'
 
   ],
   head: {
@@ -44,15 +45,21 @@ export default {
   srcDir: 'src/app/',
   serverMiddleware,
   oauth: {
-    sessionName: 'bouncerSession',
+    sessionName: 'sotdSession',
     secretKey: process.env.SECRET_KEY, // used to sign encrypted cookie
     oauthHost: process.env.OAUTH_HOST,
     oauthClientID: process.env.OAUTH_CLIENT_ID,
     oauthClientSecret: process.env.OAUTH_CLIENT_SECRET,
-    fetchUser: async () => ({}),
+    scopes: ['user-read-recently-played', 'user-top-read'],
+    accessTokenPath: '/api/token',
+    fetchUser: async token => {
+      const { user } = await Auth.run({ token })
+      return user
+    },
     onLogout: () => {}
   },
   modules: [
-    'nuxt-oauth'
+    'nuxt-oauth',
+    ['nuxt-buefy', { materialDesignIcons: false }]
   ]
 }

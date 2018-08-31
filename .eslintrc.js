@@ -1,3 +1,6 @@
 module.exports = {
-  extends: ['@samtgarson']
+  extends: ['@samtgarson'],
+  rules: {
+    'class-methods-use-this': 0
+  }
 }
