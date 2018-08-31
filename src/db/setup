@@ -1,0 +1,8 @@
+#!/bin/sh
+WORKING_DIR=${INSTALL_PATH:-$PWD}
+
+set +e
+cd $WORKING_DIR && yarn sequelize db:create
+set -e
+
+cd $WORKING_DIR &&  yarn sequelize db:migrate
