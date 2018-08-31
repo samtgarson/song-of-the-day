@@ -1,3 +1,7 @@
+import autoprefixer from 'autoprefixer'
+import { readdirSync } from 'fs'
+import { resolve } from 'path'
+
 const PRODUCTION = process.env.NODE_ENV === 'production'
 if (!PRODUCTION) {
   require('dotenv-safe').load({
@@ -5,10 +9,6 @@ if (!PRODUCTION) {
     path: 'config/.env'
   })
 }
-
-const autoprefixer = require('autoprefixer')
-const { readdirSync } = require('fs')
-const { resolve } = require('path')
 
 const plugins = readdirSync(resolve(__dirname, 'src/app/plugins')).map(f => {
   const [name] = f.split('.')
@@ -20,17 +20,11 @@ const serverMiddleware = [
 ]
 if (PRODUCTION) serverMiddleware.unshift('@/server-middleware/logger.js')
 
-module.exports = {
+export default {
   build: {
     postcss: [
       autoprefixer()
-    ],
-    babel: {
-      presets: [
-        'env',
-        'vue-app'
-      ]
-    }
+    ]
   },
   css: [
     '@@/node_modules/normalize.css/normalize.css',
@@ -55,10 +49,10 @@ module.exports = {
     oauthHost: process.env.OAUTH_HOST,
     oauthClientID: process.env.OAUTH_CLIENT_ID,
     oauthClientSecret: process.env.OAUTH_CLIENT_SECRET,
-    fetchUser: async token => ({}),
-    onLogout: (req, res, redirectUrl) => {}
+    fetchUser: async () => ({}),
+    onLogout: () => {}
   },
   modules: [
-    'nuxt-oauth',
+    'nuxt-oauth'
   ]
 }
