@@ -1,5 +1,5 @@
 <template>
-  <div class="level" v-if="user">
+  <base-section class="level" v-if="user">
     <div class="level-left">
       <div class="profile-picture level-item" :style="{ 'background-image': `url(${user.picture})` }" />
       <b-dropdown hoverable>
@@ -12,7 +12,7 @@
         </b-dropdown-item>
       </b-dropdown>
     </div>
-  </div>
+  </base-section>
 </template>
 
 <script>
