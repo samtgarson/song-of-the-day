@@ -1,7 +1,6 @@
 import Vue from 'vue'
-import '@/plugins/form'
 import { logError } from '@/plugins/global'
-import db from '@@/src/db'
+import db from '@@/src/api/db'
 import MockComponents from './mock-vue-components'
 import { reset } from '../db'
 
@@ -16,8 +15,4 @@ MockComponents.forEach(MockComponent => Vue.component(MockComponent.name, MockCo
 
 beforeEach(async () => {
   await reset()
-})
-
-afterAll(() => {
-  db.close()
 })

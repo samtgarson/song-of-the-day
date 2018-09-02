@@ -38,7 +38,7 @@
       ".*\\.(vue)$": "vue-jest"
     },
     "testMatch": [
-      "**/test/unit/**/*.js"
+      "<rootDir>/test/**/*.js"
     ],
     "testPathIgnorePatterns": [
       "node_modules",
@@ -48,6 +48,9 @@
     "moduleDirectories": [
       "node_modules",
       "<rootDir>"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(interactor)/)"
     ],
     "moduleNameMapper": {
       "^@@/(.+)": "<rootDir>/$1",
@@ -63,8 +66,8 @@
     "dev:api": "micro-dev ./src/api",
     "start": "nuxt start",
     "test:lint": "eslint --ignore-path .gitignore  --ext .js,.vue .",
-    "test:unit": "NODE_ENV=test jest",
-    "test:watch": "jest --watch",
+    "test:unit": "NODE_ENV=test jest --forceExit",
+    "test:watch": "jest --forceExit --watch",
     "test": "yarn test:unit && yarn test:lint"
   },
   "devDependencies": {

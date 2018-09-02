@@ -13,9 +13,5 @@ export default () => {
   vuexStore.commit = jest.fn()
   vuexStore._commit = _commit
 
-  const _dispatch = vuexStore.dispatch
-  vuexStore.dispatch = jest.fn()
-  vuexStore._dispatch = _dispatch
-
   return vuexStore
 }

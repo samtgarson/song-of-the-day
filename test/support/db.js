@@ -1,4 +1,4 @@
-import models from '@@/src/db/models'
+import models from '@@/src/api/db/models'
 
 // eslint-disable-next-line import/prefer-default-export
 export const reset = async () => (

@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     picture: DataTypes.STRING,
+    token: DataTypes.VIRTUAL,
     service: {
       type: DataTypes.STRING,
       unique: 'userUniqueIndex'
@@ -17,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       unique: 'userUniqueIndex'
     }
   }, {})
+
+  User.associate = models => {
+    User.belongsToMany(models.Team, { through: models.Membership, as: 'teams', foreignKey: 'userId' })
+    User.hasMany(models.Membership, { as: 'memberships', foreignKey: 'userId' })
+  }
 
   return User
 }
