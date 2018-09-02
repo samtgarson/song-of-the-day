@@ -55,8 +55,7 @@ export default {
     fetchUser: async token => {
       const { user } = await Auth.run({ token })
       return user
-    },
-    onLogout: () => {}
+    }
   },
   modules: [
     'nuxt-oauth',

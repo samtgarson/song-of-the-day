@@ -8,6 +8,7 @@
     "deep-map-keys": "^1.2.0",
     "inflect": "^0.4.0",
     "interactor": "^2.0.0",
+    "jsonwebtoken": "^8.3.0",
     "micro": "^9.1.4",
     "morgan": "^1.9.0",
     "morgan-json": "^1.1.0",

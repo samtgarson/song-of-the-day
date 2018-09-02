@@ -1,8 +1,11 @@
 const Router = require('node-async-router')
 const routes = require('./routes')
 const errorHandler = require('./middleware/error-handler')
+const auth = require('./middleware/auth')
 
 const router = new Router()
+
+router.use(auth())
 
 Object.keys(routes).forEach(route => {
   const r = new Router()
