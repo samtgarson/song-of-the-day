@@ -25,7 +25,6 @@
     "vue-feather-icons": "^4.7.1"
   },
   "pre-commit": [
-    "test"
   ],
   "jest": {
     "moduleFileExtensions": [
