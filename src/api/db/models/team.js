@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     name: DataTypes.STRING,
-    slackAttributes: DataTypes.JSONB,
+    slackAttributes: {
+      type: DataTypes.JSONB,
+      defaultValue: {}
+    },
     channelId: DataTypes.STRING
   }, {})
 

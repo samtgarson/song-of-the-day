@@ -10,8 +10,7 @@ module.exports = class AddJWT extends Interactor {
 
     ctx.user.token = await jwt.sign(
       payload,
-      process.env.SECRET_KEY,
-      { expiresIn: '1h' }
+      process.env.SECRET_KEY
     )
   }
 }

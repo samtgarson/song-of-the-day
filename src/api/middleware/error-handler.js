@@ -6,6 +6,8 @@ module.exports = (req, res) => err => {
   if (!err) return send(res, 404, 'Resource not found')
   if (err.statusCode) return send(res, err.statusCode, err.message || '')
 
+  logger.log(err)
+
   switch (err.constructor) {
     case Sequelize.DatabaseError:
       return send(res, 404, 'Resource not found')
@@ -13,7 +15,6 @@ module.exports = (req, res) => err => {
     case Sequelize.UniqueConstraintError:
       return send(res, 422, err.errors.reduce((hsh, e) => ({ ...hsh, [e.path]: e.message }), {}))
     default:
-      logger.log(err)
       return send(res, 500)
   }
 }
