@@ -5,6 +5,7 @@
   "author": "Sam Garson <samtgarson@gmail.com>",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "deep-map-keys": "^1.2.0",
     "inflect": "^0.4.0",
     "interactor": "^2.0.0",
@@ -22,10 +23,10 @@
     "sequelize-cli": "^4.0.0",
     "spotify-web-api-node": "^3.1.1",
     "uuid": "^3.2.1",
-    "vue-feather-icons": "^4.7.1"
+    "vue-feather-icons": "^4.7.1",
+    "vuex-crud": "^0.3.1"
   },
-  "pre-commit": [
-  ],
+  "pre-commit": [],
   "jest": {
     "moduleFileExtensions": [
       "js",
