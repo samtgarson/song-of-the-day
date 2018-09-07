@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const user = sequelize.define('user', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -9,20 +9,18 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     picture: DataTypes.STRING,
     token: DataTypes.VIRTUAL,
-    service: {
+    email: {
       type: DataTypes.STRING,
-      unique: 'userUniqueIndex'
-    },
-    externalId: {
-      type: DataTypes.STRING,
-      unique: 'userUniqueIndex'
+      validate: { isEmail: true },
+      unique: true
     }
   }, {})
 
-  User.associate = models => {
-    User.belongsToMany(models.Team, { through: models.Membership, as: 'teams', foreignKey: 'userId' })
-    User.hasMany(models.Membership, { as: 'memberships', foreignKey: 'userId' })
+  user.associate = models => {
+    user.belongsToMany(models.team, { through: models.membership })
+    user.hasMany(models.membership)
+    user.hasMany(models.connection)
   }
 
-  return User
+  return user
 }

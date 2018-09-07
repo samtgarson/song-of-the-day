@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import { titleize } from 'inflect'
+// import { titleize } from 'inflect'
 
 export default {
   computed: {
     service () {
-      return titleize(this.$currentUser.service)
+      return 'nothing'
     }
   }
 }

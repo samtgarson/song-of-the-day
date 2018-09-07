@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import { logError } from '@/plugins/global'
-import db from '@@/src/api/db'
 import MockComponents from './mock-vue-components'
 import { reset } from '../db'
 

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Membership = sequelize.define('Membership', {
+  const membership = sequelize.define('membership', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -30,10 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
-  Membership.associate = models => {
-    Membership.belongsTo(models.User, { as: 'user' })
-    Membership.belongsTo(models.Team, { as: 'team' })
+  membership.associate = models => {
+    membership.belongsTo(models.user)
+    membership.belongsTo(models.team)
   }
 
-  return Membership
+  return membership
 }

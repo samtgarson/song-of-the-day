@@ -1,5 +1,5 @@
 const Interactor = require('interactor')
-const { Membership, Team, User } = require('../../db/models')
+const models = require('../../db/models')
 
 module.exports = class FindOne extends Interactor {
   async run (ctx) {
@@ -11,14 +11,14 @@ module.exports = class FindOne extends Interactor {
   }
 
   getTeam () {
-    return Team.findOne({
+    return models.team.findOne({
       where: { id: this.id },
       include: [{
-        model: Membership,
+        model: models.membership,
         attributes: ['admin', 'owner'],
         as: 'memberships',
         include: [{
-          model: User,
+          model: models.user,
           as: 'user',
           attributes: ['picture', 'name', 'id']
         }]

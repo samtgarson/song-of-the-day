@@ -1,6 +1,6 @@
 import { Factory } from 'rosie'
-import { Membership } from '../../../src/api/db/models'
 import { random } from 'faker'
+import { membership as Membership } from '../../../src/api/db/models'
 
 export default new Factory(Membership)
   .option('team')

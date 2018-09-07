@@ -1,7 +1,6 @@
 import autoprefixer from 'autoprefixer'
 import { readdirSync } from 'fs'
 import { resolve } from 'path'
-import Auth from './src/api/services/auth'
 
 const PRODUCTION = process.env.NODE_ENV === 'production'
 if (!PRODUCTION) {
@@ -17,7 +16,8 @@ const plugins = readdirSync(resolve(__dirname, 'src/app/plugins')).map(f => {
 })
 
 const serverMiddleware = [
-  { path: '/api', handler: '@@/src/api/index' }
+  { path: '/api', handler: '@@/src/api/index' },
+  '@/server-middleware/auth'
 ]
 if (PRODUCTION) serverMiddleware.unshift('@/server-middleware/logger.js')
 
@@ -44,21 +44,7 @@ export default {
   plugins,
   srcDir: 'src/app/',
   serverMiddleware,
-  oauth: {
-    sessionName: 'sotdSession',
-    secretKey: process.env.SECRET_KEY, // used to sign encrypted cookie
-    oauthHost: process.env.OAUTH_HOST,
-    oauthClientID: process.env.OAUTH_CLIENT_ID,
-    oauthClientSecret: process.env.OAUTH_CLIENT_SECRET,
-    scopes: ['user-read-recently-played', 'user-top-read'],
-    accessTokenPath: '/api/token',
-    fetchUser: async token => {
-      const { user } = await Auth.run({ token })
-      return user
-    }
-  },
   modules: [
-    'nuxt-oauth',
     ['nuxt-buefy', { materialDesignIcons: false }]
   ]
 }

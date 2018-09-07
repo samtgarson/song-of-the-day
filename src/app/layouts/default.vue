@@ -1,7 +1,7 @@
 <template>
   <main class="section">
     <div class="container">
-      <Profile :user="$currentUser" />
+      <Profile :user="currentUser" />
       <nuxt />
     </div>
   </main>

@@ -5,7 +5,7 @@
       <b-dropdown hoverable>
         <p class="level-item" slot="trigger">{{ user.name }}</p>
         <b-dropdown-item has-link>
-          <a @click="$logout('/')" class="is-level">
+          <a href="/logout" class="is-level">
             <log-out-icon/>
             <span>Logout</span>
           </a>

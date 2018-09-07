@@ -1,6 +1,6 @@
 import { Factory } from 'rosie'
-import { Team } from '../../../src/api/db/models'
 import { random, commerce } from 'faker'
+import { team as Team } from '../../../src/api/db/models'
 
 export default new Factory(Team)
   .attrs({

@@ -1,5 +1,5 @@
 import { teamFactory, userFactory } from '../../support/factories'
-import { Team, Membership } from '../../../src/api/db/models'
+import { team as Team, membership as Membership } from '../../../src/api/db/models'
 import Destroy from '../../../src/api/services/teams/destroy'
 
 describe('Teams::Destroy', () => {

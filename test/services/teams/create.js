@@ -1,5 +1,5 @@
 import { teamFactory, userFactory } from '../../support/factories'
-import { Team, Membership } from '../../../src/api/db/models'
+import { team as Team, membership as Membership } from '../../../src/api/db/models'
 import Create from '../../../src/api/services/teams/create'
 
 describe('Teams::Create', () => {

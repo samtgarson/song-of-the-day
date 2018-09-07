@@ -1,6 +1,6 @@
 const Interactor = require('interactor')
 const { createError } = require('micro')
-const { Team } = require('../../db/models')
+const { team: Team } = require('../../db/models')
 
 module.exports = class Destroy extends Interactor {
   async run (ctx) {

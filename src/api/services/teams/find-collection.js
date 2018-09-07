@@ -1,5 +1,5 @@
 const Interactor = require('interactor')
-const { Team, Membership } = require('../../db/models')
+const { team: Team, membership: Membership } = require('../../db/models')
 
 module.exports = class FindCollection extends Interactor {
   async run (ctx) {

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Team = sequelize.define('Team', {
+  const team = sequelize.define('team', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     channelId: DataTypes.STRING
   }, {})
 
-  Team.associate = models => {
-    Team.belongsToMany(models.User, { through: models.Membership, as: 'users', foreignKey: 'teamId' })
-    Team.hasMany(models.Membership, { as: 'memberships', foreignKey: 'teamId' })
+  team.associate = models => {
+    team.belongsToMany(models.user, { through: models.membership })
+    team.hasMany(models.membership)
   }
-  return Team
+  return team
 }

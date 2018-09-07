@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Memberships', {
+    await queryInterface.createTable('memberships', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -29,11 +29,11 @@ module.exports = {
       }
     })
 
-    queryInterface.addIndex('Memberships', {
+    queryInterface.addIndex('memberships', {
       fields: ['userId', 'teamId'],
       unique: true,
       name: 'membershipUniqueIndex'
     })
   },
-  down: queryInterface => queryInterface.dropTable('Memberships')
+  down: queryInterface => queryInterface.dropTable('memberships')
 }

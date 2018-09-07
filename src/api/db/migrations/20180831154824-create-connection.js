@@ -1,23 +1,18 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('connections', {
       id: {
         allowNull: false,
         primaryKey: true,
         unique: true,
         type: Sequelize.UUID
       },
-      name: {
+      userId: Sequelize.UUID,
+      service: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false
-      },
-      picture: {
-        type: Sequelize.STRING
-      },
+      externalId: Sequelize.STRING,
+      refreshToken: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -27,6 +22,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
+
+    queryInterface.addIndex('connections', {
+      fields: ['service', 'externalId'],
+      unique: true,
+      name: 'connectionUniqueIndex'
+    })
   },
-  down: queryInterface => queryInterface.dropTable('users')
+  down: queryInterface => queryInterface.dropTable('connections')
 }
