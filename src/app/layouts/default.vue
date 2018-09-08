@@ -1,16 +1,19 @@
 <template>
-  <main class="section">
+<main>
+  <Nav />
+  <div class="section">
     <div class="container">
-      <Profile :user="currentUser" />
+      
       <nuxt />
     </div>
-  </main>
+  </div>
+</main>
 </template>
 
 <script>
-import Profile from '@/components/profile'
+import Nav from '@/components/nav/index'
 
 export default {
-  components: { Profile }
+  components: { Nav }
 }
 </script>

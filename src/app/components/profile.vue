@@ -1,21 +1,12 @@
 <template>
-  <base-section class="level" v-if="user">
-    <div class="level-left">
-      <div class="profile-picture level-item" :style="{ 'background-image': `url(${user.picture})` }" />
-      <b-dropdown hoverable>
-        <p class="level-item" slot="trigger">{{ user.name }}</p>
-        <b-dropdown-item has-link>
-          <a href="/logout" class="is-level">
-            <log-out-icon/>
-            <span>Logout</span>
-          </a>
-        </b-dropdown-item>
-      </b-dropdown>
-    </div>
-  </base-section>
+  <div v-if="user" class="profile">
+    <div class="profile-picture" :style="{ 'background-image': `url(${user.picture})` }" />
+    <p>{{ user.name }}</p>
+  </div>
 </template>
 
 <script>
+
 export default {
   props: {
     user: {
@@ -26,6 +17,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.profile {
+  display: flex;
+  align-items: center;
+}
+
 .profile-picture {
   width: 50px;
   height: 50px;
@@ -33,5 +29,6 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 50px;
+  margin-right: 1em;
 }
 </style>

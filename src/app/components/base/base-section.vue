@@ -1,5 +1,5 @@
 <template>
-  <div class="spacer" v-bind="$attrs">
+  <div class="base-section" v-bind="$attrs">
     <slot />
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .spacer {
+  .base-section {
     padding-bottom: 20px !important;
     margin-bottom: 30px !important;
   }
