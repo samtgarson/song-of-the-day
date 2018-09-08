@@ -42,9 +42,12 @@ export default {
     theme_color: '#3B8070'
   },
   plugins,
+  router: {
+    linkActiveClass: 'is-active'
+  },
   srcDir: 'src/app/',
   serverMiddleware,
   modules: [
-    ['nuxt-buefy', { materialDesignIcons: false }]
+    ['nuxt-buefy', { materialDesignIcons: false, css: false }]
   ]
 }

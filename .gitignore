@@ -24,3 +24,4 @@ src/app/static/workbox-sw*
 
 # Config
 .env
+session-store.db
