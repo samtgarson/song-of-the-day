@@ -21,6 +21,7 @@
     "nuxt": "npm:nuxt-edge",
     "nuxt-buefy": "^0.1.0",
     "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "passport-spotify": "^1.0.1",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",

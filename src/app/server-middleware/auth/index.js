@@ -4,6 +4,7 @@ import Router from 'node-async-router'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import LokiStore from 'connect-loki'
+import AddJwt from '../../../api/services/auth/add-jwt'
 import { user as User } from '../../../api/db/models'
 import redirect from './redirect'
 import query from './query'
@@ -17,8 +18,12 @@ passport.serializeUser(({ id }, done) => {
 })
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id)
-  done(null, user)
+  try {
+    const { user } = await AddJwt.run({ user: await User.findById(id) })
+    done(null, user)
+  } catch (err) {
+    done(err, false)
+  }
 })
 
 passport.use(new SpotifyStrategy(spotifyConfig, spotifyVerify))

@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     el () {
-      if (this.href) return 'a'
+      if (this.$attrs.href) return 'a'
       return 'nuxt-link'
     },
     iconComponent () {

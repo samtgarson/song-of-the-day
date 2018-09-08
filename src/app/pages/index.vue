@@ -7,7 +7,7 @@
     <h2 class="subtitle is-level">
       Get a song each day from your team's rotation
     </h2>
-    <base-button to="/teams" size="large" icon="arrow-right-circle" v-if="currentUser">
+    <base-button :to="{ name: 'teams' }" size="large" icon="arrow-right-circle" v-if="currentUser">
       Go to your dashboard
     </base-button>
     <base-button :href="loginUrl" :loadable="true" size="large" icon="log-in" v-else>
