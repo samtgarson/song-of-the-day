@@ -1,3 +1,3 @@
-export default ({ store, redirect, route }) => {
-  if (!store.state.user) redirect(`/?redirect-url=${route.path}`)
+export default ({ app, redirect, route }) => {
+  if (!app.$user) redirect(`/?redirect-url=${route.path}`)
 }

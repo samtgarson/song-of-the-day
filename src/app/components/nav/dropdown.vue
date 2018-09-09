@@ -1,6 +1,6 @@
 <template>
 <div class="navbar-item has-dropdown is-hoverable is-right">
-  <Profile :user="currentUser" class="navbar-link"/>
+  <Profile v-if="$user" :user="$user" class="navbar-link"/>
   <div class="navbar-dropdown is-boxed">
   <!-- <b-dropdown hoverable position="is-bottom-left" class="nav-dropdown"> -->
     <nuxt-link to="/" :exact="true" class="is-level navbar-item">

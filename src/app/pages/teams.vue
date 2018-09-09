@@ -5,8 +5,16 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+
+const { mapGetters } = createNamespacedHelpers('teams')
+
 export default {
-  middleware: 'authenticated'
+  middleware: 'authenticated',
+  computed: mapGetters(['list']),
+  asyncData ({ store }) {
+    store.dispatch('teams/fetchList')
+  }
 }
 </script>
 

@@ -3,7 +3,7 @@ import createCrudModule from 'vuex-crud'
 
 export default {
   ...createCrudModule({
-    resource: 'articles',
+    resource: 'teams',
     only: [
       'FETCH_LIST',
       'FETCH_SINGLE',

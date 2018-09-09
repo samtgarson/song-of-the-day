@@ -1,5 +1,5 @@
 <template>
-<nav v-if="currentUser" class="navbar">
+<nav v-if="$user" class="navbar">
   <div class="container">
     <div class="navbar-brand is-level">
       <nuxt-link to="/" class="navbar-item"><music-icon /></nuxt-link>
