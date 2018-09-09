@@ -6,7 +6,8 @@ import {
   UsersIcon,
   HomeIcon,
   MenuIcon,
-  ArrowRightCircleIcon
+  ArrowRightCircleIcon,
+  SlackIcon
 } from 'vue-feather-icons'
 import Vue from 'vue'
 
@@ -18,7 +19,8 @@ const icons = [
   MusicIcon,
   HomeIcon,
   MenuIcon,
-  ArrowRightCircleIcon
+  ArrowRightCircleIcon,
+  SlackIcon
 ]
 
 icons.forEach(i => Vue.component(i.name, i))

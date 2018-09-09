@@ -9,5 +9,7 @@ export default (req, res, next) => {
     res.end()
   }
 
+  req.session.redirectTo = req.query['redirect-url']
+
   next()
 }

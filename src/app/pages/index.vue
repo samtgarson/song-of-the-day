@@ -10,7 +10,7 @@
     <base-button :to="{ name: 'teams' }" size="large" icon="arrow-right-circle" v-if="$user">
       Go to your dashboard
     </base-button>
-    <base-button :href="loginUrl" :loadable="true" size="large" icon="log-in" v-else>
+    <base-button :href="loginUrl" loadable size="large" icon="log-in" v-else>
       Log In With Spotify
     </base-button>
   </section>

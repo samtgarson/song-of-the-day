@@ -11,13 +11,15 @@ module.exports = {
     const { id } = req.params
     const params = await json(req)
     const { model } = await service({ params, req, id })
-    send(res, 200, model)
+    if (!model) return send(res, 404)
+    return send(res, 200, model)
   },
 
   show: service => async (req, res) => {
     const { id } = req.params
     const { model } = await service({ req, id })
-    send(res, 200, model)
+    if (!model) return send(res, 404)
+    return send(res, 200, model)
   },
 
   index: service => async (req, res) => {

@@ -4,6 +4,7 @@ module.exports = class AddJWT extends Interactor {
   async run (ctx) {
     this.params = ctx.profile
     this.refreshToken = ctx.refreshToken
+    this.accessToken = ctx.accessToken
 
     ctx.userParams = this.userFromProfile()
     ctx.connectionParams = this.connectionFromProfile()
@@ -21,7 +22,8 @@ module.exports = class AddJWT extends Interactor {
     return {
       service: this.params.provider,
       externalId: this.params.id,
-      refreshToken: this.refreshToken
+      refreshToken: this.refreshToken,
+      accessToken: this.accessToken
     }
   }
 

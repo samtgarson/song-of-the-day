@@ -1,5 +1,5 @@
 <template>
-  <component :is="el" :class="_classes" @click="loading = true" v-bind="$attrs">
+  <component :is="el" :class="_classes" @click="loading = true" v-bind="$attrs" v-on="$listeners">
     <component :is="iconComponent" v-if="icon" />
     <slot />
   </component>
@@ -57,15 +57,15 @@ export default {
   },
   computed: {
     el () {
-      if (this.$attrs.href) return 'a'
-      return 'nuxt-link'
+      if (this.$attrs.to) return 'nuxt-link'
+      return 'a'
     },
     iconComponent () {
       return this.icon && `${this.icon}-icon`
     },
     _classes () {
       return [
-        'button is-primary',
+        'button',
         `is-${this.colour}`,
         `is-${this.size}`,
         ...this.classes,

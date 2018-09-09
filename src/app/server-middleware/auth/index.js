@@ -1,5 +1,6 @@
 import passport from 'passport'
 import { Strategy as SpotifyStrategy } from 'passport-spotify'
+import { Strategy as SlackStrategy } from '@mikestaub/passport-slack'
 import Router from 'node-async-router'
 import bodyParser from 'body-parser'
 import session from 'express-session'
@@ -8,7 +9,8 @@ import AddJwt from '../../../api/services/auth/add-jwt'
 import { user as User } from '../../../api/db/models'
 import redirect from './redirect'
 import query from './query'
-import { spotifyConfig, spotifyVerify } from './spotify-config'
+import { spotifyConfig, spotifyVerify, spotifyScope } from './spotify-config'
+import { slackConfig, slackAuthorize } from './slack-config'
 
 const router = new Router()
 const Loki = LokiStore(session)
@@ -19,7 +21,10 @@ passport.serializeUser(({ id }, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const { user } = await AddJwt.run({ user: await User.findById(id) })
+    const user = await User.findById(id)
+    if (!user) return done(null, user)
+
+    await AddJwt.run({ user })
     done(null, user)
   } catch (err) {
     done(err, false)
@@ -27,6 +32,7 @@ passport.deserializeUser(async (id, done) => {
 })
 
 passport.use(new SpotifyStrategy(spotifyConfig, spotifyVerify))
+passport.use(new SlackStrategy(slackConfig, () => {}))
 
 router.use(
   session({
@@ -38,16 +44,18 @@ router.use(
   bodyParser.json(),
   passport.initialize(),
   passport.session(),
-  redirect,
-  query
+  query,
+  redirect
+)
+
+router.get(
+  '/auth/spotify',
+  passport.authenticate('spotify', { scope: spotifyScope })
 )
 
 router.get(
   '/auth/spotify/callback',
-  passport.authenticate(
-    'spotify',
-    { failureRedirect: '/' }
-  ),
+  passport.authenticate('spotify', { failureRedirect: '/' }),
   (req, res) => {
     const redirectUrl = req.session.redirectTo || '/teams'
     return res.redirect(redirectUrl)
@@ -55,14 +63,13 @@ router.get(
 )
 
 router.get(
-  '/auth/spotify',
-  (req, res, next) => {
-    req.session.redirectTo = req.query['redirect-url']
-    next()
-  },
-  passport.authenticate('spotify', {
-    scope: ['user-read-email', 'user-read-recently-played', 'user-top-read']
-  })
+  '/auth/slack/callback',
+  slackAuthorize
+)
+
+router.get(
+  '/auth/slack',
+  passport.authorize('slack')
 )
 
 router.get('/logout', (req, res) => {

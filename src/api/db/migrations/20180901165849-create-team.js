@@ -9,9 +9,6 @@ module.exports = {
     name: {
       type: Sequelize.STRING
     },
-    slackAttributes: {
-      type: Sequelize.JSONB
-    },
     channelId: {
       type: Sequelize.STRING
     },

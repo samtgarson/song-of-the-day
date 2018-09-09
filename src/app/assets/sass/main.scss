@@ -4,15 +4,9 @@ $primary-invert: #fff;
 $link: darken($primary, 10%);
 $family-sans-serif: 'IBM Plex Sans', BlinkMacSystemFont, -apple-system, sans-serif;
 
-// @import './fonts';
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400');
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
-
-body,
-html {
-  // letter-spacing: 0.02em;
-}
 
 svg.feather {
   height: 1.2em;

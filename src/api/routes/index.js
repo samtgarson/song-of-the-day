@@ -1,3 +1,4 @@
 module.exports = {
-  '/teams/': require('./teams')
+  '/teams/': require('./teams'),
+  '/connections/': require('./connections')
 }

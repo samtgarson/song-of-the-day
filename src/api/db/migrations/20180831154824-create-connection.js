@@ -13,6 +13,10 @@ module.exports = {
       },
       externalId: Sequelize.STRING,
       refreshToken: Sequelize.STRING,
+      accessToken: Sequelize.STRING,
+      serviceAttributes: {
+        type: Sequelize.JSONB
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

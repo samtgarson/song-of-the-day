@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     refreshToken: {
       type: DataTypes.STRING
     },
+    accessToken: {
+      type: DataTypes.STRING
+    },
     service: {
       type: DataTypes.STRING,
       unique: 'connectionUniqueIndex'
@@ -20,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     externalId: {
       type: DataTypes.STRING,
       unique: 'connectionUniqueIndex'
+    },
+    serviceAttributes: {
+      type: DataTypes.JSONB,
+      defaultValue: {}
     }
   }, {})
 
