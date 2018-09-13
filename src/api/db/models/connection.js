@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false
     },
+    teamId: {
+      type: DataTypes.UUID
+    },
     refreshToken: {
       type: DataTypes.STRING
     },
@@ -32,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
   connection.associate = models => {
     connection.belongsTo(models.user)
+    connection.belongsTo(models.team)
   }
 
   return connection

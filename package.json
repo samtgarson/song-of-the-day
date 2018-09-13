@@ -5,7 +5,7 @@
   "author": "Sam Garson <samtgarson@gmail.com>",
   "private": true,
   "dependencies": {
-    "@mikestaub/passport-slack": "^1.0.1",
+    "@mikestaub/passport-slack": "samtgarson/passport-slack#single-channel-auth",
     "@slack/client": "^4.6.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
@@ -103,7 +103,7 @@
     "eslint-plugin-vue": "beta",
     "faker": "^4.1.0",
     "jest": "^20.0.4",
-    "micro-dev": "^2.2.2",
+    "micro-dev": "^3.0.0",
     "minimist": "^1.2.0",
     "node-sass": "^4.5.3",
     "nodemon": "^1.18.4",

@@ -16,10 +16,11 @@ const plugins = readdirSync(resolve(__dirname, 'src/app/plugins')).map(f => {
 })
 
 const serverMiddleware = [
+  '@/server-middleware/logger.js',
+  '@/server-middleware/query',
   { path: '/api', handler: '@@/src/api/index' },
   '@/server-middleware/auth'
 ]
-if (PRODUCTION) serverMiddleware.unshift('@/server-middleware/logger.js')
 
 export default {
   build: {

@@ -8,41 +8,84 @@
         <b-input :value="slackAttrs.teamName" disabled/>
       </b-field>
     </div>
-    <b-field label="Channel">
-      <b-select 
-        required 
-        :loading="channelsLoading" 
-        placeholder="Which channel should songs be posted?" 
-        expanded>
-        <option v-for="channel in channels" :key="channel.id">
-          {{ channel.name }}
-        </option>
-      </b-select>
+    <b-field label="Days to post?">
+      <div class="buttons has-addons">
+        <base-button v-for="(val, name) in days" :key="name" @click="toggleDay(name)" :colour="val ? 'primary' : 'light'">{{ name | titleize }}</base-button>
+      </div>
     </b-field>
-    <base-button icon="arrow-right-circle" type="submit" loadable>Create Team</base-button>
+    <b-field>
+      <div class="buttons submit-button">
+        <base-button icon="arrow-right-circle" type="submit" loadable @click="createTeam">Create Team</base-button>
+        <base-button colour="light" exact :to="{ name: 'teams' }" loadable>Never Mind</base-button>
+      </div>
+    </b-field>
   </form>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
+import { titleize } from 'inflect'
+import days from '../../../helpers/days'
 
-const { mapGetters, mapActions } = createNamespacedHelpers('connections')
+const { mapGetters, mapActions, mapState } = createNamespacedHelpers('connections')
 
 export default {
+  middleware: 'authenticated',
   data () {
-    return { channelsLoading: false, channels: [] }
+    return {
+      days: {
+        [days.SUN]: false,
+        [days.MON]: true,
+        [days.TUES]: true,
+        [days.WEDS]: true,
+        [days.THURS]: true,
+        [days.FRI]: true,
+        [days.SAT]: false
+      }
+    }
   },
   mounted () {
     this.fetchSingle({ id: this.connectionId })
   },
   methods: {
-    ...mapActions(['fetchSingle'])
+    ...mapActions(['fetchSingle']),
+    toggleDay (name) {
+      this.days[name] = !this.days[name]
+    },
+    async createTeam () {
+      const data = {
+        days: this.daysArray,
+        name: this.slackAttrs.teamName,
+        connectionId: this.connectionId
+      }
+      const { data: { id } } = await this.$store.dispatch('teams/create', { data })
+
+      this.$router.push({ name: 'teams-id', params: { id } })
+    }
+  },
+  filters: {
+    titleize (str) { return titleize(str) }
+  },
+  watch: {
+    fetchSingleError: {
+      immediate: true,
+      handler (err) {
+        if (err) this.$router.replace('/teams')
+      }
+    }
   },
   computed: {
-    ...mapGetters(['byId', 'isLoading']),
+    ...mapGetters(['byId', 'isError', 'isLoading']),
+    ...mapState(['fetchSingleError']),
     connectionId () { return this.$route.query.connectionId },
     connection () { return this.byId(this.connectionId) || {} },
-    slackAttrs () { return this.connection.serviceAttributes || {} }
+    slackAttrs () { return this.connection.serviceAttributes || {} },
+    daysArray () {
+      return Object.keys(this.days).reduce((arr, day) => {
+        if (this.days[day]) arr.push(day)
+        return arr
+      }, [])
+    }
   }
 }
 </script>
@@ -67,5 +110,9 @@ form {
   .field {
     flex-grow: 1;
   }
+}
+
+.submit-button {
+  margin-top: 30px;
 }
 </style>

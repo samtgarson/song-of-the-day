@@ -23,7 +23,7 @@ module.exports = {
   },
 
   index: service => async (req, res) => {
-    const { models } = await service({ req })
+    const { models } = await service({ req, query: req.query, params: req.params })
     send(res, 200, models)
   },
 

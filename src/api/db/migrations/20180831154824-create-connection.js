@@ -11,6 +11,7 @@ module.exports = {
       service: {
         type: Sequelize.STRING
       },
+      teamId: Sequelize.UUID,
       externalId: Sequelize.STRING,
       refreshToken: Sequelize.STRING,
       accessToken: Sequelize.STRING,

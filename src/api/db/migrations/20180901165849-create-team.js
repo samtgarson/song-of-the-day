@@ -1,3 +1,6 @@
+const days = require('../../../helpers/days')
+const states = require('../../../helpers/team-states')
+
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('teams', {
     id: {
@@ -8,6 +11,14 @@ module.exports = {
     },
     name: {
       type: Sequelize.STRING
+    },
+    days: {
+      type: Sequelize.ARRAY(Sequelize.ENUM(Object.values(days)))
+    },
+    state: {
+      type: Sequelize.ENUM(Object.values(states)),
+      defaultValue: states.PERMISSIONS_REQUIRED,
+      allowNull: false
     },
     channelId: {
       type: Sequelize.STRING

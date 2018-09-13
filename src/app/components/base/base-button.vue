@@ -17,7 +17,8 @@ const colours = [
   'info',
   'success',
   'warning',
-  'danger'
+  'danger',
+  false
 ]
 
 const sizes = [
@@ -47,6 +48,10 @@ export default {
       type: Boolean,
       default: false
     },
+    outlined: {
+      type: Boolean,
+      default: false
+    },
     icon: {
       type: String,
       validate: val => val.match(/^[a-z-]+$/)
@@ -66,10 +71,13 @@ export default {
     _classes () {
       return [
         'button',
-        `is-${this.colour}`,
         `is-${this.size}`,
         ...this.classes,
-        { 'is-loading': this.loadable && this.loading }
+        {
+          'is-loading': this.loadable && this.loading,
+          'is-outlined': this.outlined,
+          [`is-${this.colour}`]: this.colour
+        }
       ]
     }
   }

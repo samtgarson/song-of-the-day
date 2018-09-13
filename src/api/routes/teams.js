@@ -6,7 +6,6 @@ const Destroy = require('../services/teams/destroy')
 
 module.exports = router => resource({
   router,
-  routes: ['create', 'show', 'index', 'destroy'],
   services: {
     create: ({ req: { user }, ...rest }) => Create.run({ user, ...rest }),
     show: ({ req: { user }, ...rest }) => FindOne.run({ user, ...rest }),

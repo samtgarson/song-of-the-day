@@ -6,12 +6,6 @@ const client = new WebClient()
 
 module.exports = class GetAccessToken extends Interactor {
   async run (ctx) {
-    const data = await withoutHeader(() => client.oauth.access({
-      client_id: process.env.SLACK_CLIENT_ID,
-      client_secret: process.env.SLACK_CLIENT_SECRET,
-      code: ctx.code
-    }))
-
     const {
       team_id: teamId,
       team_name: teamName,
@@ -19,7 +13,7 @@ module.exports = class GetAccessToken extends Interactor {
       authorizing_user: { user_id: externalId },
       access_token: accessToken,
       refresh_token: refreshToken
-    } = data
+    } = await this.getToken()
 
     ctx.connectionParams = {
       accessToken,
@@ -32,6 +26,14 @@ module.exports = class GetAccessToken extends Interactor {
       externalId,
       service: 'slack'
     }
+  }
+
+  getToken () {
+    return withoutHeader(() => client.oauth.access({
+      client_id: process.env.SLACK_CLIENT_ID,
+      client_secret: process.env.SLACK_CLIENT_SECRET,
+      code: this.context.code
+    }))
   }
 
   getTeamImage (attrs) {

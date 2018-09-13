@@ -1,30 +1,25 @@
 const Interactor = require('interactor')
-const { team: Team, membership: Membership } = require('../../db/models')
 
 module.exports = class FindCollection extends Interactor {
   async run (ctx) {
-    const { user, params = {} } = ctx
+    const { user, query = {} } = ctx
     this.user = user
-    this.params = params
+    this.query = query
 
     ctx.models = await this.getTeams()
   }
 
   async getTeams () {
-    const { perPage: limit = 10, page = 0 } = this.params
+    const { perPage: limit = 10, page = 0 } = this.query
     const offset = limit * page
 
-    return Team.findAll({
+    return this.user.getTeams({
       limit,
       offset,
-      include: [{
-        model: Membership,
-        attributes: ['admin', 'owner'],
-        as: 'memberships',
-        where: {
-          userId: this.user.id
-        }
-      }]
+      attributes: { exclude: ['refreshToken', 'accessToken'] },
+      through: {
+        attributes: ['admin', 'owner']
+      }
     })
   }
 }

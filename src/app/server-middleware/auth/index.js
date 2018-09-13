@@ -8,7 +8,6 @@ import LokiStore from 'connect-loki'
 import AddJwt from '../../../api/services/auth/add-jwt'
 import { user as User } from '../../../api/db/models'
 import redirect from './redirect'
-import query from './query'
 import { spotifyConfig, spotifyVerify, spotifyScope } from './spotify-config'
 import { slackConfig, slackAuthorize } from './slack-config'
 
@@ -25,14 +24,15 @@ passport.deserializeUser(async (id, done) => {
     if (!user) return done(null, user)
 
     await AddJwt.run({ user })
-    done(null, user)
+    return done(null, user)
   } catch (err) {
-    done(err, false)
+    return done(err, false)
   }
 })
 
 passport.use(new SpotifyStrategy(spotifyConfig, spotifyVerify))
-passport.use(new SlackStrategy(slackConfig, () => {}))
+passport.use(new SlackStrategy(slackConfig('identity'), () => {}))
+passport.use('slack-again', new SlackStrategy(slackConfig('furtherPermissions'), () => {}))
 
 router.use(
   session({
@@ -44,7 +44,6 @@ router.use(
   bodyParser.json(),
   passport.initialize(),
   passport.session(),
-  query,
   redirect
 )
 
@@ -70,6 +69,11 @@ router.get(
 router.get(
   '/auth/slack',
   passport.authorize('slack')
+)
+
+router.get(
+  '/auth/slack-permissions',
+  passport.authorize('slack-again')
 )
 
 router.get('/logout', (req, res) => {

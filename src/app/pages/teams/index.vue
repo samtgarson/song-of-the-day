@@ -4,7 +4,9 @@
   <base-section>
     <ul>
       <li v-if="teams.length === 0">You don't have any teams yet.</li>
-      <li v-for="team in teams" :key="team.id">{{ team.name }}</li>
+      <li v-for="team in teams" :key="team.id">
+        <nuxt-link :to="{ name: 'teams-id', params: { id: team.id } }">{{ team.name }}</nuxt-link>
+      </li>
     </ul>
   </base-section>
   <base-button @click="showSlackRegister = true" icon="users" v-if="!showSlackRegister">Add a team</base-button>
