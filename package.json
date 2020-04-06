@@ -104,7 +104,7 @@
     "faker": "^4.1.0",
     "jest": "^20.0.4",
     "micro-dev": "^3.0.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "node-sass": "^4.5.3",
     "nodemon": "^1.18.4",
     "normalize.css": "^7.0.0",
