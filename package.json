@@ -7,7 +7,7 @@
   "dependencies": {
     "@mikestaub/passport-slack": "samtgarson/passport-slack#single-channel-auth",
     "@slack/client": "^4.6.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "connect-loki": "^1.1.0",
     "deep-map-keys": "^1.2.0",
