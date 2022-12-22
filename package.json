@@ -14,7 +14,7 @@
     "express-session": "^1.15.6",
     "inflect": "^0.4.0",
     "interactor": "^2.0.0",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "^9.0.0",
     "micro": "^9.1.4",
     "micro-query": "^0.3.0",
     "morgan": "^1.9.0",
